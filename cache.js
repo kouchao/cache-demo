@@ -2,10 +2,21 @@ const dayjs = require('dayjs')
 
 let cacheStore = {}
 
-module.exports = (url) => async (ctx, next) => {
+module.exports = urls => async (ctx, next) => {
   const now = dayjs().valueOf()
 
-  const isMatching = url ? url === ctx.url : true
+  // 类型检查
+  if(urls && typeof urls !== 'string'){
+    console.error('urls必须是一个数组或字符串')
+    urls = ''
+  }
+
+  // 如果urls存在 并且 不是数组
+  if(urls && Array.isArray(urls)){
+    urls = [urls]
+  }
+
+  const isMatching = urls ? urls.some(url => url === ctx.url) : true
 
   // 是否匹配路由
   if(!isMatching){
