@@ -31,5 +31,5 @@ npm i && node index.js
 可以用koa-router来匹配路由，也可以传入url
 ```
 const cache = require('./cache')
-const cacheMiddleware = cache('/api/data')
+const cacheMiddleware = cache('/api/data') // 可以使数组['/api/data']
 ```
