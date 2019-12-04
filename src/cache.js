@@ -32,8 +32,10 @@ module.exports = (conf = {}) => async (ctx, next) => {
 
   const cache = cacheStore[ctx.url]
 
-  // 未缓存
+  
   if (cache) {
+
+    // 缓存命中
     ctx.body = cache.data
   } else {
     await next()
