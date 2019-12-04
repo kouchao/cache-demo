@@ -32,13 +32,10 @@
 npm i && node index.js
 ```
 
-### 起步
-
-可以用 koa-router 来匹配路由，也可以传入 url
-
+### 两个版本
 ```
-const cache = require('./cache')
-const cacheMiddleware = cache({urls: '/api/data'}) // 可以使数组['/api/data']
+useRouterVersion(app, createCacheMiddleware) // 使用路由中间件
+useNoRouterVersion(app, createCacheMiddleware) // 不使用路由中间件
 ```
 
 ### 参数
@@ -46,4 +43,4 @@ const cacheMiddleware = cache({urls: '/api/data'}) // 可以使数组['/api/data
 | 参数 | 介绍 | 类型 | 默认值  |
 | - | - | - | - |
 | urls | 要缓存的接口地址 | `string` / `array` | `null` |
-| cronTime | cron 风格表达式 [参考](https://blog.csdn.net/shouldnotappearcalm/article/details/89469047) | `string` | `'0 0 0 * * ? *'` (每日 0 点) |
+| cronTime | cron 风格表达式 [参考](https://blog.csdn.net/shouldnotappearcalm/article/details/89469047) | `string` | `'0 0 0 * * * *'` |

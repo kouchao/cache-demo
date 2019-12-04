@@ -4,23 +4,23 @@ let cacheStore = {}
 
 module.exports = (conf = {}) => async (ctx, next) => {
 
-  const { urls, cronTime = '0 0 0 * * ? *' } = conf
-
+  let { urls, cronTime = '0 0 0 * * * *' } = conf
   // 定时任务
   new CronJob(cronTime, function() {
     cacheStore = {}
-  })
+  }, null, true, 'America/Los_Angeles')
 
   // 类型检查
-  if (urls && typeof urls !== 'string') {
+  if (urls && typeof urls !== 'string' && !Array.isArray(urls)) {
     console.error('urls必须是一个数组或字符串')
     urls = ''
   }
 
   // 如果urls存在 并且 不是数组
-  if (urls && Array.isArray(urls)) {
+  if (urls && !Array.isArray(urls)) {
     urls = [urls]
   }
+
 
   const isMatching = urls ? urls.some(url => url === ctx.url) : true
 
