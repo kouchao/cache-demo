@@ -36,7 +36,7 @@ module.exports = (conf = {}) => async (ctx, next) => {
   if (cache) {
 
     // 缓存命中
-    ctx.body = cache.data
+    ctx.body = cache
   } else {
     await next()
 
