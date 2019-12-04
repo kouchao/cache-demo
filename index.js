@@ -5,7 +5,7 @@ const cache = require('./cache')
 const app = new Koa()
 
 function getData() {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(() => {
       resolve('this is data')
     }, 3000)
@@ -14,8 +14,9 @@ function getData() {
 
 const cacheMiddleware = cache()
 
-router.get('/', async (ctx) => {
-  ctx.body = '<p>访问/api/data才会发生缓存, <a href="/api/data">点击访问</a>(数据较大，3秒后有结果)</p>'
+router.get('/', async ctx => {
+  ctx.body =
+    '<p>访问/api/data才会发生缓存, <a href="/api/data">点击访问</a>(数据较大，3秒后有结果)</p>'
 })
 
 router.get('/api/data', cacheMiddleware, async (ctx, next) => {
@@ -26,7 +27,7 @@ router.get('/api/data', cacheMiddleware, async (ctx, next) => {
 app.use(router.routes())
 
 // 若不用router中间件则使用以下方法
-// const cacheMiddleware = cache('/api/data')
+// const cacheMiddleware = cache({urls: '/api/data'})
 
 // app.use(cacheMiddleware)
 
