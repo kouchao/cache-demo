@@ -29,7 +29,7 @@
 ### 运行
 
 ```
-npm i && node index.js
+npm i && npm start
 ```
 
 ### 两个版本
